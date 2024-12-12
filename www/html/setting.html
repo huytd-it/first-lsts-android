@@ -1,0 +1,128 @@
+<ons-page id="settingPage">
+		<br>
+		
+	  <ons-list-title>INFORMATION</ons-list-title>
+
+	  					    	
+		  <ons-list modifier="inset">
+
+		  	<ons-list-item tappable style="cursor: pointer" modifier="longdivider">
+		      <div class="left"><lb class="gray">ID</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	
+
+		    <ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron"
+		      onclick="ons.notification.prompt('Full name: ')">
+		      <div class="left"><lb class="gray">Full Name</lb></div>
+		      <div class="center"></div>
+		    </ons-list-item>
+
+
+		    <ons-list-item tappable style="cursor: pointer" modifier="longdivider">
+		      <div class="left"><lb class="gray">LSTS Email</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron">
+		      <div class="left"><lb class="gray">Person Email</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron"
+		 		onclick="ons.openActionSheet({ buttons: ['Male', 'Female', 'Cancel'], destructive: 2, cancelable: true })">
+		      <div class="left"><lb class="gray">Sex</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron"
+		 	 onclick="ons.notification.prompt('Birthday: ',{'placeholder':'dd/mm/yyyy','inputType':'date'})">
+		      <div class="left"><lb class="gray">Birthday</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron">
+		      <div class="left"><lb class="gray">Phone</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron">
+		      <div class="left"><lb class="gray">Hotline</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron">
+		      <div class="left"><lb class="gray">Room number</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron">
+		      <div class="left"><lb class="gray">List room manage</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider">
+		      <div class="left"><lb class="gray">Position</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+
+		 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider">
+		      <div class="left"><lb class="gray">Is Teacher?</lb></div>
+		      <div class="center"></div>
+		 	</ons-list-item>
+		    
+
+		  </ons-list>
+
+		  <ons-list-title>LANGUAGE</ons-list-title>
+		  <ons-list id="language-list">
+		    <ons-list-item tappable>
+		      <div class="left">
+		        <ons-radio name="languageGroup" input-id="r-english" checked></ons-radio>
+		      </div>
+		      <label class="center" for="r-english">
+					<img src="https://crm3.lsts.edu.vn/crm/images/icon/en_icon.png" style="width: 30px;margin-right:10px">English
+				</label>
+
+		    </ons-list-item>
+		    <ons-list-item tappable category-id="">
+		      <div class="left">
+		        <ons-radio name="languageGroup" input-id="r-vietnamese"></ons-radio>
+		      </div>
+		      <label class="center" for="r-vietnamese">
+		      	<img src="https://crm3.lsts.edu.vn/crm/images/icon/vi_icon.jpg" style="width: 30px;margin-right: 10px;">Tiếng Việt
+		      </label>
+		    </ons-list-item>
+		  </ons-list>
+
+
+		  <ons-list-title>OTHERS</ons-list-title>
+		  	<ons-list modifier="inset">
+			  	<ons-list-item tappable style="cursor: pointer" modifier="longdivider chevron"
+			  	onclick="fn.pushPage({'id': 'html/change_password.html', 'title': 'Change Password'})">
+
+			      
+			      <div class="center">Change password</div>
+			 	</ons-list-item>
+
+			 	<ons-list-item tappable style="cursor: pointer" modifier="longdivider" onclick="fn.logout()" >
+			      
+			      <div class="center" style="color: red">Logout</div>
+			 	</ons-list-item>
+		  	</ons-list>
+
+		  	<br><br>
+
+		  
+		  <style>
+		  	lb.gray{
+		  		color: gray;
+		  	}
+		  	.alert-dialog-title{
+		  		display: none;
+		  	}
+		  </style>
+</ons-page>

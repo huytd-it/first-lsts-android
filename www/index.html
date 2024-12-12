@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="cache-control" content="no-cache" />
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="expires" content="timestamp">
+  
+
+  <title>CRM APP</title>
+
+
+  <script src="js/jquery-3.7.1.js"></script>
+
+  <script src="lib/onsen/js/onsenui.js"></script>
+  <!-- <script src="js/onsenui.min.js"></script> -->
+
+  <!-- <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script> -->
+
+  <script src="js/app.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+
+  <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+
+
+  <script src="https://crm3.lsts.edu.vn/crm/js/md5.js"></script>
+  <script src="https://crm3.lsts.edu.vn/crm/js/lsts_2.js"></script>
+  <script src="https://crm3.lsts.edu.vn/crm/js/subject_arr.js"></script>
+  <script src="https://crm3.lsts.edu.vn/crm/js/week_of_year.js"></script>
+  <script src="https://crm3.lsts.edu.vn/crm/js/CryptoJS.js"></script>
+
+  <script src="js/lsts_mobile.js"></script>
+
+</head>
+
+<body>
+
+  <!-- First navigation component: Navigator. This will remain always on top of the app. -->
+  <ons-navigator id="myNavigator" page="tabbar.html" swipeable swipe-target-width="80px">
+  </ons-navigator>
+
+
+  <!-- Second navigation component: Splitter. This will disappear if the first component changes its content. -->
+  <template id="splitter.html">
+    <ons-page>
+      <ons-splitter id="mySplitter">
+        <ons-splitter-side page="html/menu.html" swipeable width="250px" collapse swipe-target-width="50px">
+        </ons-splitter-side>
+        <ons-splitter-content page="tabbar.html" swipeable>
+        </ons-splitter-content>
+      </ons-splitter>
+    </ons-page>
+  </template>
+
+  <!-- Third navigation component: Tabbar. This will disappear if the first or second components change their content. -->
+  <template id="tabbar.html">
+    <ons-page id="tabbarPage">
+      <ons-toolbar>
+        <!-- <div class="left">          
+          <ons-toolbar-button component="button/menu">
+            <ons-icon icon="ion-navicon, material:md-menu" size="32px, material:24px"></ons-icon>
+          </ons-toolbar-button>
+        </div> -->
+        <div class="center" id="tabbar-title">CRM LSTS</div>
+
+        <!-- Toolbar-button  only visible for iOS/other. -->
+        <!-- <div class="right">          
+          <ons-if platform="ios other">
+            <ons-toolbar-button component="button/new-task">New</ons-toolbar-button>
+          </ons-if>
+        </div> -->
+      </ons-toolbar>
+
+      <!-- Floating Action Button only visible for Android. -->
+      <!-- <ons-if platform="android">
+        <ons-fab position="right bottom" component="button/new-task">
+          <ons-icon icon="md-edit"></ons-icon>
+        </ons-fab>
+      </ons-if> -->
+
+      <!-- Auto-positioned Tabbar: top on Android, bottom on iOS/other. -->
+      <ons-tabbar  id="myTabbar" swipeable position="auto">
+
+        <ons-tab page="html/home.html" label="Home" active></ons-tab>
+
+        <ons-tab page="html/contact_form.html?" label="Contact form"></ons-tab>
+              
+
+        <ons-tab page="html/setting.html?12" label="Setting"></ons-tab>
+
+        
+      </ons-tabbar>
+
+       
+
+    </ons-page>
+  </template>
+
+
+
+
+
+
+
+
+  <script>
+
+
+    
+
+    ons.platform.select('android');
+
+    document.addEventListener('prechange', function(event) {
+      document.querySelector('ons-toolbar .center')
+        .innerHTML = event.tabItem.getAttribute('label');
+
+        var label = event.tabItem.getAttribute('label');
+
+        if(label=='Home'){
+          
+        }
+    });
+
+    try{
+        //alert(window.localStorage.getItem('_user_key'));
+
+        if(!window.localStorage.getItem('_user_key') || window.localStorage.getItem('_user_key')==''){
+
+            //window.location.href ="login.html";
+
+          //return;
+        }
+    }catch(err){
+        console.log('125# '+err);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////
+
+
+    window.fn = {};
+
+
+    window.fn.logout= function(){      
+      localStorage.clear();
+      location.reload();
+    }  
+
+
+    window.fn.loadLink = function (url) {
+      window.open(url, '_blank');
+    };
+
+
+    window.fn.pushPage = function (page, anim='slide-md') {
+      
+
+      document.getElementById('myNavigator').pushPage(page.id+'?'+$.now(), { data: { title: page.title }, animation: anim });     
+
+    };
+
+
+    
+
+
+  </script>
+</body>
+
+</html>

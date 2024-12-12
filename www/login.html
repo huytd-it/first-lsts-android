@@ -1,0 +1,404 @@
+
+
+<script src="js/jquery-3.7.1.js"></script>
+     
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+<link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+
+<!-- <link rel="stylesheet" href="lib/onsen/css/onsenui.css">
+<link rel="stylesheet" href="lib/onsen/css/onsen-css-components.css">
+<link rel="stylesheet" href="css/style.css"> -->
+
+
+<script src="js/onsenui.min.js"></script>
+
+
+<script src="https://crm3.lsts.edu.vn/crm/js/md5.js"></script>
+<script src="https://crm3.lsts.edu.vn/crm/js/lsts_2.js"></script>
+<script src="https://crm3.lsts.edu.vn/crm/js/subject_arr.js"></script>
+<script src="https://crm3.lsts.edu.vn/crm/js/week_of_year.js"></script>
+<script src="https://crm3.lsts.edu.vn/crm/js/CryptoJS.js"></script>
+
+<script src="js/lsts_mobile.js"></script>
+
+
+
+
+		
+
+		
+	
+
+
+				<ons-navigator swipeable id="myNavigator" page="login.html"></ons-navigator>
+
+
+				<template id="login.html">
+					<ons-page>
+
+					  <div style="text-align: center; margin-top: 20px">
+
+					  	<p>
+					  		<img src="https://lsts.edu.vn/images/icon/logo.svg" style="margin:auto;width:200px;">
+					  	</p>
+					  	<p class="p_label"><ons-label>School as:</ons-label></p>
+					  	<p>	  		
+					  		<ons-select modifier="underbar" style="width:350px" id="school_key">	  			
+					  		</ons-select>
+					  	</p>
+
+
+					  	
+					  	<p class="p_label"><ons-label>AD Year:</ons-label></p>
+					  	<p>	  		
+					  		<ons-select modifier="underbar" style="width:350px" id="school_year">	  			
+					  		</ons-select>
+					  	</p>
+
+
+
+					  	<p class="p_label"><ons-label>Login as:</ons-label></p>
+					  	<p>
+					  		<ons-select modifier="underbar" style="width:350px" id="slSelect">	  		
+					  			<option value="STUDENT">1. STUDENT</option>
+					  			<option value="PARENT">2. PARENT</option>
+					  			<option value="STAFF">3. STAFF</option>
+					  			<option value="DRIVER">4. BUS MONITOR</option>
+					  		</ons-select>
+					  	</p>
+
+					  	<p class="p_label"><ons-label>LSTS Email:</ons-label></p>
+					    <p>
+					      <ons-input id="LSTS_email" modifier="underbar" type="email" placeholder="" float style="width:350px"></ons-input>
+					    </p>
+
+					    <p class="p_label"><ons-label>LSTS Password:</ons-label></p>
+					    <p>
+					      <ons-input id="LSTS_password" modifier="underbar" type="text" placeholder="" float style="width:350px"></ons-input>
+					    </p>
+					    <p style="margin-top: 30px;">
+					      <ons-button onclick="login()" style="width: 350px; margin: 0 auto;">Sign in</ons-button>
+
+					      <ons-button onclick="forgot_password()" style="width: 350px; margin: 0 auto;" modifier="large--quiet">Forgot password</ons-button>
+					    </p>
+					  </div>
+					</ons-page>
+				</template>
+
+				<template id="forgot.html">
+					<ons-page id="forgot">
+						<ons-toolbar>
+							<div class="left">
+								<ons-back-button>Login</ons-back-button>
+							</div>
+							<div class="center">Forgot password</div>
+						</ons-toolbar>
+
+
+						<div style="text-align: center; margin-top: 15%">
+
+					  	<p class="p_label"><ons-label>You are:</ons-label></p>	
+					  	<p>
+					  		<ons-select modifier="underbar" style="width:350px" id="slSelect_forgot">	  			
+					  			<option value="STUDENT">1. STUDENT</option>
+					  			<option value="PARENT">2. PARENT</option>
+					  			<option value="STAFF">3. STAFF</option>	  			
+					  		</ons-select>
+					  	</p>
+					  	<p class="p_label"><ons-label>LSTS Email:</ons-label></p>
+					    <p>
+					      <ons-input id="LSTS_email_forgot" modifier="underbar" type="email" placeholder="" float style="width:350px"></ons-input>
+					    </p>
+					    
+					    <p style="margin-top: 30px;">
+					      <ons-button onclick="forgot_password_submit()" style="width: 350px; margin: 0 auto;">Submit</ons-button>	      
+					    </p>
+					  </div>
+					
+					</ons-page>
+
+
+				</template>
+				
+
+				<ons-modal direction="up" id="ons-modal-loading">
+				  <div style="text-align: center">
+				    <p>
+				      <ons-icon icon="md-spinner" size="28px" spin></ons-icon> Loading...
+				    </p>
+				  </div>
+				</ons-modal>
+
+				<style>
+					.page__background{
+
+						background: white !important;
+					}
+					ons-label{
+						color: gray;
+					}
+					.p_label{
+						text-align:left;
+						width: 350px;
+						margin: auto;
+					}
+
+					#LSTS_password input{        
+				        text-security:square;
+				        -webkit-text-security:square;
+				        -mox-text-security:square;
+				        
+				      }
+				</style>
+
+
+
+
+				<script>
+
+				
+
+				
+				</script> 
+
+				
+
+
+				<script type="text/javascript">
+
+					//w3includeHTML();
+				
+					ons.platform.select('android');
+
+					ons.ready(function() {
+
+					$('#LSTS_email').on('keypress', function(e) {
+					        if (e.key == '@') {
+					            setTimeout(function() {
+					                $('#LSTS_email').val($('#LSTS_email').val() + 'lsts.edu.vn');
+					            }, 100)
+
+					        }
+
+
+					    });
+					  // var infiniteList = document.getElementById('infinite-list');
+
+					  // infiniteList.delegate = {
+					  //   createItemContent: function(i) {
+					  //     return ons.createElement('<ons-list-item>Item ' + i + '</ons-list-item>');
+					  //   },
+					  //   countItems: function() {
+					  //     return 10000;
+					  //   }
+					  // };
+
+					  // infiniteList.refresh();
+
+						var src='<script src="https://crm3.lsts.edu.vn/crm/element/option_school.php?json_callback=1&function_name=option_school"><\/script>';
+
+						$('#div_script').append(src);
+
+						var src='<script src="https://crm3.lsts.edu.vn/crm/element/option_class_year.php?json_callback=1&function_name=option_class_year"><\/script>';
+
+						$('#div_script').append(src);
+					});
+
+					/////////////////////////////////////////////////////////////////////////////
+					/////////////////////////////////////////////////////////////////////////////
+					/////////////////////////////////////////////////////////////////////////////
+
+					
+					function option_class_year(data){
+						$('#school_year select').html(data);		
+					}
+					function option_school(data){				
+						$('#school_key select').html(data);		
+				 	}
+						
+
+
+					function login(){
+						var school_key = $('#school_key').val();
+						var school_year = $('#school_year').val();
+						var slSelect = $('#slSelect').val();
+						var LSTS_email = $('#LSTS_email').val();
+						var LSTS_password = $('#LSTS_password').val();
+
+						if(school_key==''){
+							ons.notification.alert('Please select school');
+							return;
+						}
+						if(slSelect==''){
+							ons.notification.alert('Please select Login as');
+							return;
+						}
+						if(LSTS_email==''){
+							ons.notification.alert('Please input LSTS email');
+							return;
+						}
+						if(LSTS_email.indexOf('@') == -1){
+							ons.notification.alert('Wrong LSTS email');
+							return;
+						}
+						if(LSTS_password==''){
+							ons.notification.alert('Please input LSTS password');
+							return;
+						}
+
+						$('#ons-modal-loading').show();
+
+						setTimeout(function(){
+							LSTS_email = $.trim(LSTS_email);
+					        LSTS_email = LSTS_email.toLowerCase();
+
+					        var url = 'https://crm3.lsts.edu.vn/crm/ajax/ajax_lsts.php?parameter_0='+crm_md5('lsts_login');
+
+					        try{
+					        	url+='&school_key='+school_key;
+						        url+='&school_year='+school_year;
+						        url+='&login_person='+slSelect;
+						        url+='&user_email='+$.md5(LSTS_email);
+						        url+='&user_pass='+$.md5(LSTS_password);        
+
+
+						        var src='<script src="'+url+'&json_callback=1&function_name=lsts_login"><\/script>';
+
+
+
+								$('#div_script').append(src);
+					        }catch(err){
+					        	console.log('191# '+err);
+					        }
+						},1000)
+
+						
+				    	
+						
+					}
+
+					function lsts_login(data){
+						$('#ons-modal-loading').hide();
+						//alert(data);
+						try{
+							data = $.parseJSON(data);
+
+					        var user_key = data['result'][0]['user_key'];
+
+
+					        if (user_key == null) {            
+
+					            ons.notification.alert('283# Login unsuccessful');                        
+
+					        }else{
+					        	
+					        	var school_key = $('#school_key').val();
+								var school_year = $('#school_year').val();
+
+					        	var user_name = data['result'][0]['user_name'];
+				                var user_email = data['result'][0]['user_email'];
+				                var user_email_2 = data['result'][0]['user_email_2'];
+				                var user_avatar = data['result'][0]['user_avatar'];
+				                var user_position = data['result'][0]['user_position'];
+				                var student_id = data['result'][0]['student_id'];
+				                var class_id = data['result'][0]['class_id'];
+				                var class_level = data['result'][0]['class_level'];
+
+				                var staff_id = data['result'][0]['staff_id'];
+
+				                var dept_name = data['result'][0]['dept_name'];
+				                var password = data['result'][0]['password'];
+				                var password_md5 = data['result'][0]['password_md5'];
+				                var staff_signature = data['result'][0]['staff_signature'];
+
+				                var user_sex = data['result'][0]['user_sex'];
+
+				                var house_level = data['result'][0]['house_level'];
+				                var family_id = data['result'][0]['family_id'];
+				                var supervisor = data['result'][0]['supervisor'];
+
+
+
+				                window.localStorage.setItem('_user_key', user_key);
+				                window.localStorage.setItem('_user_name', user_name);
+				                window.localStorage.setItem('_user_email', user_email);
+				                window.localStorage.setItem('_user_email_2', user_email_2);
+
+				                if (user_position.toUpperCase() == 'STUDENT') {
+				                    window.localStorage.setItem('_user_name', user_name + '(S)');
+				                }
+
+				                window.localStorage.setItem('_user_position', user_position);
+				                window.localStorage.setItem('_user_avatar', user_avatar);
+				                window.localStorage.setItem('_student_id', student_id);
+				                window.localStorage.setItem('_class_id', class_id);
+				                window.localStorage.setItem('_class_level', class_level);
+
+				                window.localStorage.setItem('_user_login_at', $.now());
+				                window.localStorage.setItem('_staff_id', staff_id);
+
+
+				                window.localStorage.setItem('_dept_name', dept_name);
+				                window.localStorage.setItem('_password_hash', hashPassword(password));
+				                window.localStorage.setItem('_password_md5', password_md5);
+				                window.localStorage.setItem('_staff_signature', staff_signature);
+
+				                window.localStorage.setItem('_school_key', school_key);
+				                window.localStorage.setItem('_school_year', school_year);
+
+				                window.localStorage.setItem('_user_sex', user_sex);
+				                window.localStorage.setItem('_house_level', house_level);
+				                window.localStorage.setItem('_family_id', family_id);
+				                window.localStorage.setItem('_supervisor', supervisor);
+
+
+				                var user_avatar = '<img src="https://crm3.lsts.edu.vn/crm/' + user_avatar + '" style="height:150px;">';
+				                
+
+				                ons.notification.alert('<center>'+user_avatar + '<br>Login successful !!!</center>');
+
+				                //ons.notification.alert('✔ Login successful !!!');
+
+				                setTimeout(function(){
+				                	window.location.href ="index.html?"+$.now();
+				                },3000)
+				                
+					        }
+						}catch(err){
+							ons.notification.alert('357# Login unsuccessful');
+							console.log('357# '+err);
+						}
+						
+					}
+
+					function forgot_password_submit(){
+						var slSelect_forgot = $('#slSelect_forgot').val();
+						var LSTS_email_forgot = $('#LSTS_email_forgot').val();
+
+						if(slSelect_forgot==''){
+							ons.notification.alert('Please select [You are]');
+							return;
+						}
+
+						if(LSTS_email_forgot==''){
+							ons.notification.alert('Please input LSTS email');
+							return;
+						}
+						if(LSTS_email_forgot.indexOf('@') == -1){
+							ons.notification.alert('Wrong LSTS email');
+							return;
+						}
+
+					}
+
+					function forgot_password(){
+						document.querySelector('#myNavigator').pushPage('forgot.html', {data: {title: 'Forgot Password'}});
+					}
+				</script>
+
+
+				<div id=div_script></div>
+
+	
+
+
